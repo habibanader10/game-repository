@@ -1,7 +1,7 @@
 package game.engine;
 
 public enum Role {
-    Konafa , KONAFA;
+    SCARER, LAUGHER;
 
 
 }
