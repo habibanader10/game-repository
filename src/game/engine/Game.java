@@ -1,13 +1,10 @@
 package game.engine;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import game.engine.cells.Cell;
 import game.engine.dataloader.DataLoader;
 import game.engine.monsters.Monster;
-import game.engine.cards.Card;
-
+import java.io.IOException;
+import java.util.ArrayList;
 public class Game {
     private Board board;
     private ArrayList<Monster> allMonsters;
@@ -20,10 +17,6 @@ public class Game {
         ArrayList<Cell> readCells = DataLoader.readCells();
         ArrayList<Monster> readMonsters = DataLoader.readMonsters();
         allMonsters = readMonsters;
-
-        ArrayList<Monster> playerMonsters = new ArrayList<>();
-        ArrayList<Monster> opponentMonsters = new ArrayList<>();
-
         Role opponentRole;
 
         if(playerRole == Role.LAUGHER){
@@ -31,17 +24,53 @@ public class Game {
         }
         else 
             opponentRole = Role.LAUGHER;
-
-        for(int i =0 ; i<allMonsters.size(); i++){
-            Monster m = allMonsters.get(i);
-            if(m.getRole() == playerRole){
-                playerMonsters.add(m);
-            }
-            else if(m.getRole() == opponentRole){
-                opponentMonsters.add(m);
-            }
+        player = selectRandomMonsterByRole(playerRole);
+        opponent = selectRandomMonsterByRole(opponentRole);
+        this.current = player;
         }
 
+    
+    private Monster selectRandomMonsterByRole(Role role){
+        ArrayList<Monster> monstersByRole = new ArrayList<>();
+        Monster m;
+        for(int i =0 ; i<allMonsters.size(); i++){
+            m = allMonsters.get(i);
+            if(m.getRole() == role){
+                monstersByRole.add(m);
+            }
+        }
+        int randomIndex = (int) (Math.random() * monstersByRole.size());
+        return monstersByRole.get(randomIndex);
+    }
+
+
+    public Board getBoard() {
+        return board;
+    }
+
+
+    public ArrayList<Monster> getAllMonsters() {
+        return allMonsters;
+    }
+
+
+    public Monster getPlayer() {
+        return player;
+    }
+
+
+    public Monster getOpponent() {
+        return opponent;
+    }
+
+
+    public Monster getCurrent() {
+        return current;
+    }
+
+
+    public void setCurrent(Monster current) {
+        this.current = current;
     }
 
 }
