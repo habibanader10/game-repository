@@ -26,7 +26,7 @@ public class DataLoader {
    private String monsters;
 
     public static ArrayList<Card> readCards() throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader("csvfiles/cards.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("cards.csv"));
         ArrayList<Card> cards = new ArrayList<>();
         String line;
         Card card = null;
@@ -63,7 +63,7 @@ public class DataLoader {
 
     }
     public static ArrayList<Cell> readCells() throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader("csvfiles/cells.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("cells.csv"));
         ArrayList<Cell> cells = new ArrayList<>();
         String line;
         while((line=br.readLine())!= null) {
@@ -96,7 +96,7 @@ public class DataLoader {
     }
 
      public static ArrayList<Monster> readMonsters() throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader("csvfiles/monsters.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("monsters.csv"));
         ArrayList<Monster> monsters = new ArrayList<>();
         String line;
         while((line=br.readLine())!= null) {

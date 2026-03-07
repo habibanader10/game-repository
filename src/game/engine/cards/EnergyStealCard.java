@@ -1,7 +1,7 @@
 package game.engine.cards;
 
 public class EnergyStealCard extends Card {
-    private int energy;
+    private final int energy;
 
     public EnergyStealCard(String name, String description, int rarity, int energy) {
         super(name, description, rarity, true);

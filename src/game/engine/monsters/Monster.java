@@ -2,10 +2,10 @@ package game.engine.monsters;
 import game.engine.Role;
 
 public abstract class Monster implements Comparable {
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
     private Role role;
-    private Role originalRole;
+    private final Role originalRole;
     private int energy;
     private int position;
     private boolean frozen;
