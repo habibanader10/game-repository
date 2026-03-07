@@ -127,10 +127,4 @@ public class DataLoader {
         br.close();
         return monsters;
      }
-
-     
-
-
-
-
 }
