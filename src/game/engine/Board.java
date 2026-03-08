@@ -1,11 +1,9 @@
 package game.engine;
 
-import java.util.ArrayList;
-
+import game.engine.cards.Card;
 import game.engine.cells.Cell;
 import game.engine.monsters.Monster;
-import game.engine.cards.Card;
-import game.engine.dataloader.DataLoader;
+import java.util.ArrayList;
 
 public class Board {
     private final Cell[][] boardCells;
