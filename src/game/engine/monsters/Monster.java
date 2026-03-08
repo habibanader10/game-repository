@@ -1,7 +1,8 @@
 package game.engine.monsters;
+import game.engine.Constants;
 import game.engine.Role;
 
-public abstract class Monster implements Comparable {
+public abstract class Monster implements Comparable<Monster> {
     private final String name;
     private final String description;
     private Role role;
@@ -60,13 +61,14 @@ public abstract class Monster implements Comparable {
     }
 
     public void setEnergy(int energy) {
-        if(energy>=0)
+        if(energy < 0)
+            this.energy = 0;
+        else
             this.energy = energy;
     }
 
     public void setPosition(int position) {
-        if(position >=0 && position<=99 )
-            this.position = position;
+        this.position = position % Constants.BOARD_SIZE;
     }
 
     public void setFrozen(boolean frozen) {
@@ -80,8 +82,7 @@ public abstract class Monster implements Comparable {
     public void setConfusionTurns(int confusionTurns) {
         this.confusionTurns = confusionTurns;
     }
-    public int compareTo(Object o) {
-        Monster other = (Monster) o;
+    public int compareTo(Monster other) {
         return this.position - other.position;
     }
     
