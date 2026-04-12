@@ -7,6 +7,13 @@ public class StartOverCard extends Card {
 	public StartOverCard(String name, String description, int rarity, boolean lucky) {
 		super(name, description, rarity, lucky);
 	}
-	public void performAction(Monster player, Monster opponent){}
+	public void performAction(Monster player, Monster opponent){
+		if(isLucky()){
+			player.setPosition(0);
+		}
+		else {
+			opponent.setPosition(0);
+		}	
+	}
 
 }
