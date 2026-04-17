@@ -33,8 +33,10 @@ public class DoorCell extends Cell implements CanisterModifier {
 	}
 	
 	public void modifyCanisterEnergy(Monster monster, int canisterValue){
-			monster.alterEnergy(canisterValue);
-		}
+	    boolean matchRole = monster.getRole() == this.role;
+	    int finalEnergy = matchRole ? Math.abs(canisterValue) : -Math.abs(canisterValue);
+	    monster.alterEnergy(finalEnergy);
+	}
 
 	
 	public void onLand(Monster landingMonster, Monster opponentMonster){
@@ -47,7 +49,7 @@ public class DoorCell extends Cell implements CanisterModifier {
         	Doorenergy *= -1;	
 		}
 		int og = landingMonster.getEnergy();
-    	landingMonster.alterEnergy(Doorenergy);
+    	modifyCanisterEnergy(landingMonster, Doorenergy);
     	if (landingMonster.getEnergy() != og)
        		 this.activated = true;
 	}

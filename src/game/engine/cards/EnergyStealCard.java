@@ -17,6 +17,8 @@ public class EnergyStealCard extends Card implements CanisterModifier {
 	
 	public void performAction(Monster player, Monster opponent) {
     	if(opponent.isShielded()){
+			// Remove the shield from the opponent
+			opponent.setShielded(false); 
 			return;
 		}	
 		else{
