@@ -12,19 +12,23 @@ public class Schemer extends Monster {
 	}
 	
 	 private int stealEnergyFrom(Monster target){
-		int stolenEnergy = Constants.SCHEMER_STEAL;
-		if(target.getEnergy() < stolenEnergy) {
-			stolenEnergy = target.getEnergy();
-		}
-		return stolenEnergy;
-	 }
-	 //byzaaaa
-	 public void executePowerupEffect(Monster opponentMonster){
-		int stolenEnergy = stealEnergyFrom(opponentMonster);
-		opponentMonster.setEnergy(opponentMonster.getEnergy() - stolenEnergy);
-		this.setEnergy(this.getEnergy() + stolenEnergy);
-		
+    int stolenEnergy = Constants.SCHEMER_STEAL;
+    if(target.getEnergy() < stolenEnergy) {
+        stolenEnergy = target.getEnergy();
     }
+    return stolenEnergy;
+}
+	
+
+	public void executePowerupEffect(Monster opponentMonster) {
+
+    int stealAmount = 10; // or constant
+
+    int actualSteal = Math.min(stealAmount, opponentMonster.getEnergy());
+
+    opponentMonster.setEnergy(opponentMonster.getEnergy() - actualSteal);
+    this.setEnergy(this.getEnergy() + actualSteal);
+}
 
 	}
 

@@ -13,5 +13,8 @@ public class MonsterCell extends Cell {
 	public Monster getCellMonster() {
 		return cellMonster;
 	}
+	public void onLand(Monster landingMonster, Monster opponentMonster){
+		
+	}
 
 }

@@ -31,8 +31,25 @@ public class DoorCell extends Cell implements CanisterModifier {
 	public void setActivated(boolean isActivated) {
 		this.activated = isActivated;
 	}
-	public  void modifyCanisterEnergy(Monster monster, int canisterValue){
 	
+	public void modifyCanisterEnergy(Monster monster, int canisterValue){
+			monster.alterEnergy(canisterValue);
+		}
+
+	
+	public void onLand(Monster landingMonster, Monster opponentMonster){
+		if(this.activated) {
+			return;
+		}
+		boolean matchRole = landingMonster.getRole() == this.role;
+		int Doorenergy = this.getEnergy();
+		if(!matchRole) {
+        	Doorenergy *= -1;	
+		}
+		int og = landingMonster.getEnergy();
+    	landingMonster.alterEnergy(Doorenergy);
+    	if (landingMonster.getEnergy() != og)
+       		 this.activated = true;
 	}
 
 }
