@@ -118,5 +118,7 @@ public abstract class Monster implements Comparable<Monster> {
 		}
 	 }
 
+	 
+
 
 }
