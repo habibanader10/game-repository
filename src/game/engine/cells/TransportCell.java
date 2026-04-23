@@ -14,7 +14,11 @@ public abstract class TransportCell extends Cell {
 		return effect;
 	}
 	public void transport(Monster monster){
-		 monster.move(this.effect);
+		monster.setPosition(monster.getPosition() + this.effect);
 	}
+	public void onLand(Monster landingMonster, Monster opponentMonster) {
+        setMonster(landingMonster);
+        transport(landingMonster);
+    }
 	
 }

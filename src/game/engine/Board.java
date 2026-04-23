@@ -68,51 +68,37 @@ public class Board {
 		boardCells[rowCol[0]][rowCol[1]] = cell;
 	}
 
-	public void initializeBoard(ArrayList<Cell> specialCells){
-		int totalCells = Constants.BOARD_SIZE;
-   		 // default cells
-		for (int i = 0; i < totalCells; i++) {
-			if (i % 2 == 0) {
-				setCell(i, new Cell("Rest"));
-			} else {
-				// take door cells from specialCells list
-				setCell(i,specialCells.remove(0));
-			}
-		}
-		//Card Cells
-		for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) {
-			int idx = Constants.CARD_CELL_INDICES[i];
-			setCell(idx, new CardCell("Card Cell"));
-		}
-		// Conveyor Belts
-		for (int i = 0; i < Constants.CONVEYOR_CELL_INDICES.length; i++) {
-			int idx = Constants.CONVEYOR_CELL_INDICES[i];
-			Cell c = specialCells.remove(0);
-			setCell(idx, c);
-		}
-
-		// Contamination Socks
-		for (int i = 0; i < Constants.SOCK_CELL_INDICES.length; i++) {
-			int idx = Constants.SOCK_CELL_INDICES[i];
-			Cell c = specialCells.remove(0);
-			setCell(idx, c);
-		}
-		// Monster Cells
-		for (int i = 0; i < Constants.MONSTER_CELL_INDICES.length; i++) {
-			int idx = Constants.MONSTER_CELL_INDICES[i];
-			Monster m = stationedMonsters.remove(0);
-			setCell(idx, new MonsterCell("Monster Cell", m));
-		}
-
-		// Place stationed monsters
-		for (int i = 0; i < stationedMonsters.size(); i++) {
-			Monster m = stationedMonsters.get(i);
-			int pos = m.getPosition();
-			Cell cell = getCell(pos);
-			cell.setMonster(m);
-		}
+	public void initializeBoard(ArrayList<Cell> specialCells) {
+	    //Doors (odd) and Rest cells (even)
+	    for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+	        if (i % 2 == 0) {
+	            setCell(i, new Cell("Rest"));
+	        } else {
+	            setCell(i, specialCells.remove(0));
+	        }
+	    }
+	    //  Card cells 
+	    for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) {
+	        setCell(Constants.CARD_CELL_INDICES[i], new CardCell("Card Cell"));
+	    }
+	    int conveyorIdx = 0, sockIdx = 0;
+	    while (!specialCells.isEmpty()) {
+	        Cell c = specialCells.remove(0);
+	        if (c instanceof ConveyorBelt) {
+	            setCell(Constants.CONVEYOR_CELL_INDICES[conveyorIdx++], c);
+	        } else if (c instanceof ContaminationSock) {
+	            setCell(Constants.SOCK_CELL_INDICES[sockIdx++], c);
+	        }
+	    }
+	    for (int i = 0; i < Constants.MONSTER_CELL_INDICES.length && i < stationedMonsters.size(); i++) {
+	        int idx = Constants.MONSTER_CELL_INDICES[i];
+	        Monster m = stationedMonsters.get(i);
+	        m.setPosition(idx);
+	        setCell(idx, new MonsterCell(m.getName(), m));
+	    }
 	}
 
+	
 	private  void setCardsByRarity(){
 		ArrayList<Card> expanded = new ArrayList<>();
 		for (int i = 0; i < originalCards.size(); i++) {
@@ -152,8 +138,10 @@ public class Board {
         currentMonster.setPosition(oldPos);
         throw new InvalidMoveException("Collision occurred");
     }
+    if (currentMonster.isConfused()){
     currentMonster.decrementConfusion();
     opponentMonster.decrementConfusion();
+    }
     //  Sync board
     updateMonsterPositions(currentMonster, opponentMonster);
 }

@@ -1,14 +1,12 @@
 package game.engine;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import game.engine.dataloader.DataLoader;
 import game.engine.exceptions.InvalidMoveException;
 import game.engine.exceptions.OutOfEnergyException;
 import game.engine.monsters.*;
-import java.util.random.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Game {
 	private Board board;
@@ -24,8 +22,8 @@ public class Game {
 		this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
 		this.current = player;
 		ArrayList<Monster> stationedMonsters = new ArrayList<>(allMonsters);
-		stationedMonsters.remove(player);
-		stationedMonsters.remove(opponent);
+		allMonsters.remove(player);
+		allMonsters.remove(opponent);
 		board.setStationedMonsters(stationedMonsters);
 		board.initializeBoard(DataLoader.readCells());
 	}
