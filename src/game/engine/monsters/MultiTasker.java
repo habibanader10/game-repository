@@ -31,17 +31,11 @@ public class MultiTasker extends Monster {
 }
 
 public void setEnergy(int energy) {
-    int current = getEnergy();
-    int change = energy - current;
- //mashkook f mawdoo3 -200 or +200
-    if (change != 0) {
-        if (change > 0)
-            change += 200;
-        else
-            change -= 200;
-    }
-    super.setEnergy(current + change);
-}
+	    int current = getEnergy();
+	    int change = energy - current;
+	    change += 200;   // ALWAYS, remove any "if change != 0" guard
+	    super.setEnergy(current + change);
+	}
 
 	public void executePowerupEffect(Monster opponentMonster) {
 		 this.normalSpeedTurns = 2;

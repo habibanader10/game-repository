@@ -31,16 +31,11 @@ public class Schemer extends Monster {
 	}
 
 	public void setEnergy(int energy) {
-		int current = getEnergy();
-		int change = energy - current;
-		if (change != 0) {
-			if (change > 0)
-				change += 10;
-			else
-				change -= 10;
-		}
-		super.setEnergy(current + change);
-	}
+        int current = getEnergy();
+        int change = energy - current;
+        change += 10;   // ALWAYS, even when raw change is 0
+        super.setEnergy(current + change);
+    }
 
 	}
 
