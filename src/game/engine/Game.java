@@ -8,7 +8,6 @@ import game.engine.dataloader.DataLoader;
 import game.engine.exceptions.InvalidMoveException;
 import game.engine.exceptions.OutOfEnergyException;
 import game.engine.monsters.*;
-import java.util.random.*;
 
 public class Game {
 	private Board board;
