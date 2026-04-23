@@ -169,6 +169,8 @@ public class Board {
 		Cell opponentCell = getCell(opponent.getPosition());
 		opponentCell.setMonster(opponent);
 	}
+
+
 }
 
 
