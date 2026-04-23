@@ -4,12 +4,11 @@ import game.engine.dataloader.DataLoader;
 import game.engine.exceptions.InvalidMoveException;
 import game.engine.exceptions.OutOfEnergyException;
 import game.engine.monsters.*;
-<<<<<<< HEAD
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-=======
->>>>>>> 3af79e1db28d6ae50ea1848e8e41d3df547cee34
+
+
 
 public class Game {
 	private Board board;
