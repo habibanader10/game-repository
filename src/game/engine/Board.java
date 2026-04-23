@@ -121,19 +121,10 @@ public class Board {
 				expanded.add(c);
 			}
 		}
-		cards = expanded;
+		originalCards = expanded;
 }
 	public static void reloadCards() {
-		//duplicated code, can be optimized by calling setCardsByRarity() instead
-		ArrayList<Card> expanded = new ArrayList<>();
-		for (int i = 0; i < originalCards.size(); i++) {
-			Card c = originalCards.get(i);
-			for (int j = 0; j < c.getRarity(); j++) {
-				expanded.add(c);
-			}
-		}
-		cards = expanded;
-	//
+		 cards = originalCards;
 		java.util.Random rand = new java.util.Random();
 		for (int i = cards.size() - 1; i > 0; i--) {
 			int j = rand.nextInt(i + 1);
